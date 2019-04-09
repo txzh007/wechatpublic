@@ -2,7 +2,6 @@ package link.tanxin.wechatpublic.controller;
 
 import link.tanxin.wechatpublic.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Tan
  * 2019年4月8日 11:28:09
  */
-@Controller
+@RestController
 public class WechatController {
     @Autowired
     WechatService wechatService;
@@ -22,8 +21,7 @@ public class WechatController {
      * @param echostr   随机字符串
      * @return
      */
-    @RequestMapping("/getToken")
-    @ResponseBody
+    @GetMapping("/getToken")
     public String wxdemo(@RequestParam("signature") String signature,
                          @RequestParam("timestamp") String timestamp,
                          @RequestParam("nonce") String nonce,

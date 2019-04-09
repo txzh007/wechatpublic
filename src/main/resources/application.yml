@@ -15,7 +15,6 @@ wechat:
   apppid: wxbdc9e3e2a67f8d8e
   appsecret: 63dff4b49392404865a3f54750636fa2
 
+
 logging:
-  file:
-    path: log
-    name: logging
+  config: classpath:log4j2.yml
