@@ -4,11 +4,6 @@ spring:
     url: jdbc:mysql://106.15.196.61:3306/back_stage?serverTimezone=Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: backstagedemo
     password: demo123456
-
-
-
-
-
 server:
   port: 8080
 #  servlet:
@@ -16,3 +11,11 @@ server:
 #  tomcat:
 #    uri-encoding: UTF-8
 #    max-threads: 1000
+wechat:
+  apppid: wxbdc9e3e2a67f8d8e
+  appsecret: 63dff4b49392404865a3f54750636fa2
+
+logging:
+  file:
+    path: log
+    name: logging

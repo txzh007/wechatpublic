@@ -8,7 +8,7 @@
         <version>2.2.0.M1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>tech.tanxin</groupId>
+    <groupId>link.tanxin</groupId>
     <artifactId>wechatpublic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>wechatpublic</name>
