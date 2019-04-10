@@ -2,9 +2,6 @@ package link.tanxin.wechatpublic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-//import org.springframework.boot.builder.SpringApplicationBuilder;
-//import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /***
  * @author Tan
@@ -12,15 +9,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 
 @SpringBootApplication
-public class WechatpublicApplication {   // extends SpringBootServletInitializer
-
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(WechatpublicApplication.class);
-//    }
-
+public class WechatpublicApplication {
     public static void main(String[] args) {
         SpringApplication.run(WechatpublicApplication.class, args);
     }
-
 }
