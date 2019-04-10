@@ -12,7 +12,7 @@
     <artifactId>wechatpublic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>wechatpublic</name>
-    <description>Demo project for Spring Boot</description>
+    <description>wechat demo</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -20,27 +20,32 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
-                <!--<exclusion>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-                <!--</exclusion>-->
-                <!--</exclusions>-->
+                <exclusion><!-- 去除默认配置 -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.0.1</version>
 
-                <!-- 切换log4j2日志读取 -->
-                <exclusion>
+            <exclusions>
+                <exclusion><!-- 去除默认配置 -->
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
 
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.0.0</version>
         </dependency>
 
         <dependency>
@@ -53,27 +58,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-           <!-- 配置 log4j2 -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
-        <!-- 加上这个才能辨认到log4j2.yml文件 -->
-        <dependency>
+
+        <dependency>  <!-- 支持识别yml配置 -->
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.apache.tomcat.embed</groupId>-->
-        <!--<artifactId>tomcat-embed-jasper</artifactId>-->
-        <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-
     </dependencies>
 
     <build>
@@ -83,9 +77,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <!--<finalName>wechat</finalName>-->
     </build>
-    <!--<packaging>war</packaging>-->
 
     <repositories>
         <repository>

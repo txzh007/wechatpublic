@@ -17,4 +17,6 @@ wechat:
 
 
 logging:
-  config: classpath:log4j2.yml
+  config: classpath:log4j2.xml
+  level:
+    cn.jay.repository: trace
