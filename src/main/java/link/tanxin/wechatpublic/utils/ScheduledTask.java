@@ -7,10 +7,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
 @Configuration      //主要用于标记配置类，兼备Component的效果。
 @EnableScheduling   //开启定时任务
 public class ScheduledTask {
@@ -18,7 +18,7 @@ public class ScheduledTask {
 
     @PostConstruct
     //添加定时任务
-    @Scheduled(cron = "0 0 1 * * ?")  // 秒 分 时 日 月 周几
+    @Scheduled(cron = "0 0/90 * * * ?")  // 秒 分 时 日 月 周几
     private void timeToGetToken() {
         Map<String, Object> map = new HashMap<String, Object>(3);
         map.put("grant_type", "client_credential");
@@ -27,6 +27,7 @@ public class ScheduledTask {
 
         System.out.println("***********************************");
         System.out.println(HttpUtils.sendGet(tokenUrl, map, "UTF-8"));
+        System.out.println(LocalTime.now());
 
     }
 }

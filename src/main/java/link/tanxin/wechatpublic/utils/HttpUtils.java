@@ -80,8 +80,8 @@ public class HttpUtils {
             conn.setRequestProperty("contentType", charset);
             conn.setRequestProperty("content-type", "application/x-www-form-urlencoded");
             // 设置超时时间
-            conn.setConnectTimeout(60);
-            conn.setReadTimeout(60);
+            conn.setConnectTimeout(500);
+            conn.setReadTimeout(500);
             // 建立实际的连接
             conn.connect();
             // 定义 BufferedReader输入流来读取URL的响应,设置接收格式
@@ -130,8 +130,8 @@ public class HttpUtils {
             conn.setRequestProperty("contentType", charset);
             conn.setRequestProperty("content-type", "application/x-www-form-urlencoded");
             // 设置超时时间
-            conn.setConnectTimeout(60);
-            conn.setReadTimeout(60);
+            conn.setConnectTimeout(500);
+            conn.setReadTimeout(500);
             // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
