@@ -4,20 +4,27 @@ package link.tanxin.wechatpublic.utils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration      //主要用于标记配置类，兼备Component的效果。
-@EnableScheduling   //开启定时任务
+/**
+ * 定时任务工具类
+ *
+ * @author Tan
+ * 2019年4月11日 15:41:17
+ */
+@Configuration
+@EnableScheduling
 public class ScheduledTask {
     final String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
 
+    /**
+     * 每90分钟获取一次token，Token有效期 2小时
+     */
     @PostConstruct
-    //添加定时任务
     @Scheduled(cron = "0 0/90 * * * ?")  // 秒 分 时 日 月 周几
     private void timeToGetToken() {
         Map<String, Object> map = new HashMap<String, Object>(3);

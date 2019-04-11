@@ -11,8 +11,6 @@
         <!--数据库用户名配置-->
         <!--数据库密码配置-->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <mapping resource="link/tanxin/wechatpublic/model/UserInfoEntity.hbm.xml"/>
-        <mapping class="link.tanxin.wechatpublic.model.UserInfoEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!--<property name=”hbm2ddl.auto”>update</property> -->

@@ -4,10 +4,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-public class WechatUtils {
+/**
+ * 微信公众号相关操作工具类
+ *
+ * @author Tan
+ * 2019年4月11日 15:39:25
+ */
+public class WechatUtil {
 
     public final static String TOKEN = "wechatdemotest";
-    public static String sort( String timestamp, String nonce) {
+
+    public static String sort(String timestamp, String nonce) {
         String[] strArray = {TOKEN, timestamp, nonce};
         Arrays.sort(strArray);
         StringBuilder sb = new StringBuilder();
