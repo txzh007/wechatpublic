@@ -32,6 +32,8 @@ public class WechatController {
 
     }
 
+
+
     @PostMapping("/comm")
     public String focused(@RequestParam("signature") String signature,
                           @RequestParam("timestamp") String timestamp,
