@@ -26,7 +26,7 @@ import java.util.Map;
 @EnableScheduling
 public class ScheduledTask {
 
-    final String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
+    private static final String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
     static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     @Value("${wechat.appid}")
     private String appid;
@@ -37,7 +37,7 @@ public class ScheduledTask {
      * 每90分钟获取一次Token，Token有效期 2小时
      */
     @PostConstruct
-    @Scheduled(cron = "0 0/30 * * * ?")  // 秒 分 时 日 月 周几
+    @Scheduled(cron = "0 0 0/1 * * ?")  // 秒 分 时 日 月 周几
     private void timeToGetToken() {
 
         Map<String, Object> map = new HashMap<String, Object>(3);

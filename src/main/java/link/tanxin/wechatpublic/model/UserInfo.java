@@ -1,8 +1,8 @@
 package link.tanxin.wechatpublic.model;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
+
 
 @Entity
 @Table(name = "user_info", schema = "wechat_dev", catalog = "")
