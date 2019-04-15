@@ -3,6 +3,7 @@ package link.tanxin.wechatpublic.controller;
 import link.tanxin.wechatpublic.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 微信Token接口
@@ -32,17 +33,17 @@ public class WechatController {
 
     }
 
-
+    /**
+     * 此方法用于消息转发
+     * @param request
+     * @return
+     */
 
     @PostMapping("/comm")
-    public String focused(@RequestParam("signature") String signature,
-                          @RequestParam("timestamp") String timestamp,
-                          @RequestParam("nonce") String nonce,
-                          @RequestParam("openid") String openid) {
-        System.out.println("openid:" + openid);
+    public String processMsg(HttpServletRequest request) {
 
-        return "123";
-
+        // 调用核心服务类接收处理请求
+        return wechatService.processRequest(request);
     }
 
 
