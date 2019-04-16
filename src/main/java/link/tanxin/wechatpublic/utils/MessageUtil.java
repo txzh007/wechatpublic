@@ -1,6 +1,5 @@
 package link.tanxin.wechatpublic.utils;
 
-import link.tanxin.wechatpublic.model.TextMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;

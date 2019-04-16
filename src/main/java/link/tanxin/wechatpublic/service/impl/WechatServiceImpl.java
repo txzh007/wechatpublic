@@ -1,14 +1,20 @@
 package link.tanxin.wechatpublic.service.impl;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import link.tanxin.wechatpublic.model.TextMessage;
+import link.tanxin.wechatpublic.model.wechatMessage.TextMessage;
+import link.tanxin.wechatpublic.model.wechatMessage.VideoMessage;
 import link.tanxin.wechatpublic.service.WechatService;
+import link.tanxin.wechatpublic.utils.BeanToMap;
 import link.tanxin.wechatpublic.utils.WechatUtil;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * WechatService 实现类
@@ -16,6 +22,7 @@ import java.io.InputStreamReader;
  * @author Tan
  * 2019年4月15日 09:32:10
  */
+@Log4j2
 @Service
 public class WechatServiceImpl implements WechatService {
     @Override
@@ -36,29 +43,43 @@ public class WechatServiceImpl implements WechatService {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String processRequest(HttpServletRequest request) {
         char[] buf = new char[1024];
         int length;
         StringBuilder builder = new StringBuilder();
 
-        try (InputStreamReader inputStreamReader = new InputStreamReader(request.getInputStream(), "utf-8");) {
+        try (InputStreamReader inputStreamReader = new InputStreamReader(request.getInputStream(), "utf-8")) {
             while ((length = inputStreamReader.read(buf)) != -1) {
                 builder.append(new String(buf, 0, length));
             }
-
-            System.out.println(builder);
-            XmlMapper xmlMapper = new XmlMapper();
+            ObjectMapper xmlMapper = new XmlMapper();
             //忽略pojo中不存在的字段
             xmlMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
-            TextMessage textMessage = xmlMapper.readValue(builder.toString(), TextMessage.class);
-
-            System.out.println(textMessage);
+            Map<String, Object> map = xmlMapper.readValue(builder.toString(), HashMap.class);
+            dealMessage(BeanToMap.toReplaceKeyLow(map));
+            log.info(map.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "";
 
+    }
+
+    private String dealMessage(Map<String, Object> map) throws Exception {
+        System.out.println(map.toString());
+        switch (map.get("msgType").toString()) {
+            case "text":
+                System.out.println("map:" + map.toString());
+                TextMessage textMessage = (TextMessage) BeanToMap.toBean(map, TextMessage.class);
+                System.out.println(textMessage.toString());
+                break;
+
+            default:
+                break;
+        }
+        return "";
     }
 }
