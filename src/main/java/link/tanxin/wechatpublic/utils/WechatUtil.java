@@ -47,4 +47,12 @@ public class WechatUtil {
         }
         return "";
     }
+
+    public static boolean checkSignature(String signature, String timestamp, String nonce) {
+        // 将token、timestamp、nonce三个参数进行字典序排序
+        String sortString = sort(timestamp, nonce);
+        //将三个参数字符串拼接成一个字符串进行sha1加密
+        String myString = sha1(sortString);
+        return signature.equals(myString);
+    }
 }

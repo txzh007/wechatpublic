@@ -25,7 +25,11 @@ public class VideoMessage {
 
     private String MediaId;
 
+    private String Title;
+
     private String ThumbMediaId;
 
     private String MsgId;
+
+    private String Description;
 }

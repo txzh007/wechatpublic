@@ -1,6 +1,7 @@
 package link.tanxin.wechatpublic.service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author Tan
@@ -8,14 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * 此类是用于与微信服务器通信
  */
 public interface WechatService {
-    /**
-     * @param signature 微信加密签名，结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
-     * @param timestamp 时间戳
-     * @param nonce     随机数
-     * @param echostr   随机字符串
-     * @return
-     */
-    String wechatToken(String signature, String timestamp, String nonce, String echostr);
+
 
     /**
      * 此类方法用于处理微信消息请求
@@ -24,5 +18,21 @@ public interface WechatService {
      * @return
      */
 
-    String processRequest(HttpServletRequest request);
+    Map<String, String> processRequest(HttpServletRequest request);
+
+    /**
+     * 此方法用于处理微信事件
+     *
+     * @param map
+     * @return
+     */
+    String parseEvent(Map<String, String> map);
+
+    /**
+     * 此方法用于处理微信消息
+     *
+     * @param map
+     * @return
+     */
+    String parseMessage(Map<String, String> map);
 }
