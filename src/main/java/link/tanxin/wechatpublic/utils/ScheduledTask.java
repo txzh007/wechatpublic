@@ -29,13 +29,13 @@ import java.util.Map;
 @Configuration
 @EnableScheduling
 public class ScheduledTask {
-    private static final String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
-    static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Value("${wechat.appid}")
-    private String appid;
+    private String appId;
     @Value("${wechat.appsecret}")
-    private String appsecret;
+    private String appSecret;
 
 
     @PostConstruct
@@ -44,13 +44,13 @@ public class ScheduledTask {
      * 每个整点获取一次Token，Token有效期 2小时
      */
     private void timeToGetToken() {
-        System.out.println("appid:" + appid);
-        System.out.println("appsecret:" + appsecret);
+        System.out.println("appid:" + appId);
+        System.out.println("appsecret:" + appSecret);
         Map<String, Object> map = new HashMap<>(3);
         map.put("grant_type", "client_credential");
-        map.put("appid", appid);
-        map.put("secret", appsecret);
-        log.info(HttpUtils.sendGet(tokenUrl, map, "UTF-8"));
+        map.put("appid", appId);
+        map.put("secret", appSecret);
+        log.info(HttpUtils.sendGet(TOKEN_URL, map, "UTF-8"));
         log.info(LocalDateTime.now().format(DATETIME_FORMATTER));
 
 

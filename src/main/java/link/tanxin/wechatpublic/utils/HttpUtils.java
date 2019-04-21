@@ -9,6 +9,12 @@ import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Http工具类 用于发送GET POST请求
+ *
+ * @author Tan
+ * 2019年4月21日 20:04:56
+ */
 public class HttpUtils {
     /**
      * 向指定URL发送GET方法的请求
@@ -19,17 +25,17 @@ public class HttpUtils {
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendGet(String url, Map<String, Object> map, String charset) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         //构建请求参数
         if (map != null && map.size() > 0) {
             // 定义迭代器
             Iterator it = map.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry er = (Map.Entry) it.next();
-                sb.append(er.getKey());
-                sb.append("=");
-                sb.append(er.getValue());
-                sb.append("&");
+                sb.append(er.getKey())
+                        .append("=")
+                        .append(er.getValue())
+                        .append("&");
             }
         }
         return sendGet(url, sb.toString(), charset);
@@ -44,14 +50,14 @@ public class HttpUtils {
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendPost(String url, Map<String, Object> map, String charset) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         //构建请求参数
         if (map != null && map.size() > 0) {
             for (Map.Entry<String, Object> e : map.entrySet()) {
-                sb.append(e.getKey());
-                sb.append("=");
-                sb.append(e.getValue());
-                sb.append("&");
+                sb.append(e.getKey())
+                        .append("=")
+                        .append(e.getValue())
+                        .append("&");
             }
         }
         return sendPost(url, sb.toString(), charset);

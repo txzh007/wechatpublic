@@ -3,13 +3,12 @@ package link.tanxin.wechatpublic.service.impl;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import link.tanxin.wechatpublic.model.wechatMessage.Articles;
-import link.tanxin.wechatpublic.model.wechatMessage.NewsMessage;
-import link.tanxin.wechatpublic.model.wechatMessage.TextMessage;
+import link.tanxin.wechatpublic.model.wechatmessage.Articles;
+import link.tanxin.wechatpublic.model.wechatmessage.NewsMessage;
+import link.tanxin.wechatpublic.model.wechatmessage.TextMessage;
 import link.tanxin.wechatpublic.service.WechatService;
 import link.tanxin.wechatpublic.utils.MessageUtil;
 import link.tanxin.wechatpublic.utils.MsgTypeParam;
-import link.tanxin.wechatpublic.utils.XmlUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -56,14 +55,14 @@ public class WechatServiceImpl implements WechatService {
 
     @Override
     public String parseEvent(Map<String, String> map) {
-        String respXml = null;
+        String respXml = "";
         try {
             // 发送方帐号
             String fromUserName = map.get("FromUserName");
             // 开发者微信号
             String toUserName = map.get("ToUserName");
             // 取得消息类型
-            String MsgType = map.get("MsgType");
+            String msgType = map.get("MsgType");
             //获取事件类型
             String eventType = map.get("Event");
 
@@ -106,10 +105,10 @@ public class WechatServiceImpl implements WechatService {
             // 开发者微信号
             String toUserName = map.get("ToUserName");
             // 取得消息类型
-            String MsgType = map.get("MsgType");
+            String msgType = map.get("MsgType");
             // 发现直接把要返回的信息直接封装成replyMap集合，然后转换成 xml文件，是不是实体类可以不用了
-            TextMessage textMessage = null;
-            switch (MsgType) {
+            TextMessage textMessage;
+            switch (msgType) {
                 case MsgTypeParam.TEXT_MESSAGE:
                     // 封装文本返回消息
                     textMessage = new TextMessage();
@@ -150,7 +149,7 @@ public class WechatServiceImpl implements WechatService {
                     respXml = MessageUtil.sendImageTextMessage(message);
                     break;
                 case MsgTypeParam.VOICE_MESSAGE:
-                    // 以下方式根据需要来操作
+                    /* 以下方式根据需要来操作 */
                     textMessage = new TextMessage();
                     textMessage.setMsgType(MsgTypeParam.RESP_MESSAGE_TYPE_TEXT);
                     textMessage.setToUserName(fromUserName);

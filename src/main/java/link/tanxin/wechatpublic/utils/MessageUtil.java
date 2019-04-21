@@ -1,7 +1,7 @@
 package link.tanxin.wechatpublic.utils;
 
 
-import link.tanxin.wechatpublic.model.wechatMessage.*;
+import link.tanxin.wechatpublic.model.wechatmessage.*;
 
 /**
  * MessageUtil 用于发送微信消息的工具类
@@ -30,31 +30,31 @@ public class MessageUtil {
      */
     public static String sendImageTextMessage(NewsMessage message) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<xml>");
-        sb.append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>");
-        sb.append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>");
-        sb.append("<CreateTime>" + message.getCreateTime() + "</CreateTime>");
-        sb.append("<MsgType><![CDATA[" + MsgTypeParam.IMAGE_TEXT_MESSAGE + "]]></MsgType>");
-        sb.append("<ArticleCount>" + message.getArticleCount() + "</ArticleCount>");
-        sb.append("<Articles> ");
+        sb.append("<xml>")
+                .append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>")
+                .append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>")
+                .append("<CreateTime>" + message.getCreateTime() + "</CreateTime>")
+                .append("<MsgType><![CDATA[" + MsgTypeParam.IMAGE_TEXT_MESSAGE + "]]></MsgType>")
+                .append("<ArticleCount>" + message.getArticleCount() + "</ArticleCount>")
+                .append("<Articles> ");
         for (Articles article : message.getArticles()) {
             sb.append("<item>");
-            if (article.getTitle() != null && article.getTitle() != "") {
+            if (article.getTitle() != null && article.getTitle().length() != 0) {
                 sb.append("<Title><![CDATA[").append(article.getTitle()).append("]]></Title>");
             }
-            if (article.getDescription() != null && article.getDescription() != "") {
+            if (article.getDescription() != null && article.getDescription().length() != 0) {
                 sb.append("<Description><![CDATA[").append(article.getDescription()).append("]]></Description>");
             }
-            if (article.getPicUrl() != null && article.getPicUrl() != "") {
+            if (article.getPicUrl() != null && article.getPicUrl().length() != 0) {
                 sb.append("<PicUrl><![CDATA[").append(article.getPicUrl()).append("]]></PicUrl>");
             }
-            if (article.getUrl() != null && article.getUrl() != "") {
+            if (article.getUrl() != null && article.getUrl().length() != 0) {
                 sb.append("<Url><![CDATA[").append(article.getUrl()).append("]]></Url>");
             }
             sb.append("</item>");
         }
-        sb.append("</Articles>");
-        sb.append("</xml>");
+        sb.append("</Articles>")
+                .append("</xml>");
         return sb.toString();
     }
 
@@ -75,28 +75,28 @@ public class MessageUtil {
      */
     public static String sendMusicMessage(MusicMessage message) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<xml>");
-        sb.append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>");
-        sb.append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>");
-        sb.append("<CreateTime>" + message.getCreateTime() + "</CreateTime>");
-        sb.append("<MsgType><![CDATA[" + MsgTypeParam.MUSIC_MESSAGE + "]]></MsgType>");
-        sb.append("<Music>");
-        if (message.getTitle() != null && !"".equals(message.getTitle())) {
+        sb.append("<xml>")
+                .append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>")
+                .append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>")
+                .append("<CreateTime>" + message.getCreateTime() + "</CreateTime>")
+                .append("<MsgType><![CDATA[" + MsgTypeParam.MUSIC_MESSAGE + "]]></MsgType>")
+                .append("<Music>");
+        if (message.getTitle() != null && message.getTitle().length() != 0) {
             sb.append("<Title><![CDATA[" + message.getTitle() + "]]></Title>");
         }
-        if (message.getDescription() != null && !"".equals(message.getDescription())) {
+        if (message.getDescription() != null && message.getDescription().length() != 0) {
             sb.append("<Description><![CDATA[" + message.getDescription() + "]]></Description>");
         }
-        if (message.getMusicUrl() != null && !"".equals(message.getMusicUrl())) {
+        if (message.getMusicUrl() != null && message.getMusicUrl().length() != 0) {
             sb.append("<MusicUrl><![CDATA[" + message.getMusicUrl() + "]]></MusicUrl>");
         }
-        if (message.getHQMusicUrl() != null && !"".equals(message.getHQMusicUrl())) {
-            sb.append("<HQMusicUrl><![CDATA[" + message.getHQMusicUrl() + "]]></HQMusicUrl>");
+        if (message.getHqMusicUrl() != null && message.getHqMusicUrl().length() != 0) {
+            sb.append("<HQMusicUrl><![CDATA[" + message.getHqMusicUrl() + "]]></HQMusicUrl>");
         }
 
-        sb.append("<ThumbMediaId><![CDATA[" + message.getThumbMediaId() + "]]></ThumbMediaId>");
-        sb.append("</Music>");
-        sb.append("</xml>");
+        sb.append("<ThumbMediaId><![CDATA[" + message.getThumbMediaId() + "]]></ThumbMediaId>")
+                .append("</Music>")
+                .append("</xml>");
         return sb.toString();
     }
 
@@ -115,21 +115,21 @@ public class MessageUtil {
      */
     public static String sendVideoMessage(VideoMessage message) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<xml>");
-        sb.append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>");
-        sb.append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>");
-        sb.append("<CreateTime>" + message.getCreateTime() + "</CreateTime>");
-        sb.append("<MsgType><![CDATA[" + MsgTypeParam.VIDEO_MESSAGE + "]]></MsgType>");
-        sb.append("<Video>");
-        sb.append("<MediaId><![CDATA[" + message.getMediaId() + "]]></MediaId>");
-        if (message.getTitle() != null && !"".equals(message.getTitle())) {
+        sb.append("<xml>")
+                .append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>")
+                .append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>")
+                .append("<CreateTime>" + message.getCreateTime() + "</CreateTime>")
+                .append("<MsgType><![CDATA[" + MsgTypeParam.VIDEO_MESSAGE + "]]></MsgType>")
+                .append("<Video>")
+                .append("<MediaId><![CDATA[" + message.getMediaId() + "]]></MediaId>");
+        if (message.getTitle() != null && message.getTitle().length() != 0) {
             sb.append("<Title><![CDATA[" + message.getTitle() + "]]></Title>");
         }
-        if (message.getDescription() != null && !"".equals(message.getDescription())) {
+        if (message.getDescription() != null && message.getDescription().length() != 0) {
             sb.append("<Description><![CDATA[" + message.getDescription() + "]]></Description>");
         }
-        sb.append("</Video>");
-        sb.append("</xml>");
+        sb.append("</Video>")
+                .append("</xml>");
         return sb.toString();
     }
 
@@ -145,16 +145,15 @@ public class MessageUtil {
      * @Description 回复语音消息
      */
     public static String sendVoiceMessage(VoiceMessage message) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("<xml>");
-        sb.append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>");
-        sb.append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>");
-        sb.append("<CreateTime>" + message.getCreateTime() + "</CreateTime>");
-        sb.append("<MsgType><![CDATA[" + MsgTypeParam.VOICE_MESSAGE + "]]></MsgType>");
-        sb.append("<Voice>");
-        sb.append("<MediaId><![CDATA[" + message.getMediaId() + "]]></MediaId>");
-        sb.append("</Voice>");
-        sb.append("</xml>");
+        StringBuilder sb = new StringBuilder();
+        sb.append("<xml>").append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>")
+                .append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>")
+                .append("<CreateTime>" + message.getCreateTime() + "</CreateTime>")
+                .append("<MsgType><![CDATA[" + MsgTypeParam.VOICE_MESSAGE + "]]></MsgType>")
+                .append("<Voice>")
+                .append("<MediaId><![CDATA[" + message.getMediaId() + "]]></MediaId>")
+                .append("</Voice>")
+                .append("</xml>");
         return sb.toString();
     }
 
@@ -170,15 +169,15 @@ public class MessageUtil {
      */
     public static String sendImageMessage(ImageMessage message) {
         StringBuffer sb = new StringBuffer();
-        sb.append("<xml>");
-        sb.append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>");
-        sb.append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>");
-        sb.append("<CreateTime>" + message.getCreateTime() + "</CreateTime>");
-        sb.append("<MsgType><![CDATA[" + MsgTypeParam.IMAGE_MESSAGE + "]]></MsgType>");
-        sb.append("<Image>");
-        sb.append("<MediaId><![CDATA[" + message.getMediaId() + "]]></MediaId>");
-        sb.append("</Image>");
-        sb.append("</xml>");
+        sb.append("<xml>")
+                .append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>")
+                .append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>")
+                .append("<CreateTime>" + message.getCreateTime() + "</CreateTime>")
+                .append("<MsgType><![CDATA[" + MsgTypeParam.IMAGE_MESSAGE + "]]></MsgType>")
+                .append("<Image>")
+                .append("<MediaId><![CDATA[" + message.getMediaId() + "]]></MediaId>")
+                .append("</Image>")
+                .append("</xml>");
         return sb.toString();
     }
 
@@ -193,13 +192,13 @@ public class MessageUtil {
      */
     public static String sendTextMessage(TextMessage message) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<xml>");
-        sb.append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>");
-        sb.append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>");
-        sb.append("<CreateTime>" + message.getCreateTime() + "</CreateTime>");
-        sb.append("<MsgType><![CDATA[" + MsgTypeParam.TEXT_MESSAGE + "]]></MsgType>");
-        sb.append("<Content><![CDATA[" + message.getContent() + "]]></Content>");
-        sb.append("</xml>");
+        sb.append("<xml>")
+                .append("<ToUserName><![CDATA[" + message.getToUserName() + "]]></ToUserName>")
+                .append("<FromUserName><![CDATA[" + message.getFromUserName() + "]]></FromUserName>")
+                .append("<CreateTime>" + message.getCreateTime() + "</CreateTime>")
+                .append("<MsgType><![CDATA[" + MsgTypeParam.TEXT_MESSAGE + "]]></MsgType>")
+                .append("<Content><![CDATA[" + message.getContent() + "]]></Content>")
+                .append("</xml>");
         return sb.toString();
     }
 

@@ -71,10 +71,10 @@ public class WechatController {
             response.setContentType("text/xml");
             // 调用parseXml方法解析请求消息
             Map<String, String> map = wechatService.processRequest(request);
-            String MsgType = map.get("MsgType");
+            String msgType = map.get("MsgType");
             //处理输入消息，返回结果的xml
             String xml = null;
-            if (MsgTypeParam.REQ_MESSAGE_TYPE_EVENT.equals(MsgType)) {
+            if (MsgTypeParam.REQ_MESSAGE_TYPE_EVENT.equals(msgType)) {
                 xml = wechatService.parseEvent(map);
             } else {
                 xml = wechatService.parseMessage(map);

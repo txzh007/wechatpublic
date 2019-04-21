@@ -1,4 +1,5 @@
 package link.tanxin.wechatpublic.model;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -154,8 +155,12 @@ public class UserInfo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UserInfo userInfo = (UserInfo) o;
         return Objects.equals(id, userInfo.id) &&
                 Objects.equals(nickname, userInfo.nickname) &&

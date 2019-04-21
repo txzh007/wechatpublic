@@ -33,8 +33,8 @@ public class WechatUtil {
             // Create Hex String
             StringBuilder hexString = new StringBuilder();
             // 字节数组转换为 十六进制 数
-            for (int i = 0; i < messageDigest.length; i++) {
-                String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
+            for (byte u : messageDigest) {
+                String shaHex = Integer.toHexString(u & 0xFF);
                 if (shaHex.length() < 2) {
                     hexString.append(0);
                 }
