@@ -1,8 +1,6 @@
 package link.tanxin.wechatpublic.model.wechatmessage;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**
  * 微信视频消息 实体类
@@ -10,9 +8,7 @@ import lombok.ToString;
  * @author Tan
  * 2019年4月16日 14:32:07
  */
-@Setter
-@Getter
-@ToString
+@Data
 public class VideoMessage extends BaseMessage{
 
 

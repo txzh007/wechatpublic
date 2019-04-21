@@ -1,8 +1,6 @@
 package link.tanxin.wechatpublic.model.wechatmessage;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**
  * 音乐消息实体类
@@ -10,10 +8,8 @@ import lombok.ToString;
  * @author Tan
  * 2019年4月21日 15:49:21
  */
-@Getter
-@Setter
-@ToString
-public class MusicMessage extends BaseMessage {
+@Data
+public class  MusicMessage extends BaseMessage {
 
 
     private String hqMusicUrl;
