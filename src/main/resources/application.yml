@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://106.15.196.61:3306/wechat_dev?serverTimeZone=Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://xxxxx:3306/wechat_dev?serverTimeZone=Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: wechat
     password: 123456
 
@@ -33,6 +33,27 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  mail:
+    host: smtp.exmail.qq.com
+    username: xxxxxx
+    password: xxxxxx
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 100000
+          connectiontimeout: 100000
+          socketFactory:
+            port: 465
+            fallback: false
+            class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: false
+            required: false
+    port: 465
+
+
 server:
   port: 8080
 #  servlet:
@@ -42,8 +63,8 @@ server:
 #    max-threads: 1000
 
 wechat:
-  appid: wxbdc9e3e2a67f8d8e
-  appsecret: 63dff4b49392404865a3f54750636fa2
+  appid: xxxxx
+  appsecret: xxxxxx
 
 
 logging:

@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @RepositoryDefinition(domainClass = UserInfo.class, idClass = Integer.class)
-public interface UserInfoResitory extends JpaRepository {
+public interface UserInfoResitory {
 
     @Query(value = "select * FROM user_info u WHERE id = (SELECT  MAX(id) FROM user_info)", nativeQuery = true)
     List<UserInfo> selectMaxId();

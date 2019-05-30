@@ -14,13 +14,13 @@ public class TestController {
     @Autowired
     UserInfoResitory userInfoResitory;
 
-    @GetMapping("/test")
-    public List<UserInfo> test() {
-        List<UserInfo> list = userInfoResitory.findAll();
-        for (UserInfo userInfoEntity : list) {
-            System.out.println("this is list");
-            System.out.println(userInfoEntity.toString());
-        }
-        return list;
-    }
+//    @GetMapping("/test")
+//    public List<UserInfo> test() {
+//        List<UserInfo> list = userInfoResitory.findAll();
+//        for (UserInfo userInfoEntity : list) {
+//            System.out.println("this is list");
+//            System.out.println(userInfoEntity.toString());
+//        }
+//        return list;
+//    }
 }
