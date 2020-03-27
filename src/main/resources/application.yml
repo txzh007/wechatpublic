@@ -6,6 +6,7 @@ spring:
     password: 123456
 
     type: com.alibaba.druid.pool.DruidDataSource
+
     #配置监控统计拦截的filters，去掉后监控界面sql将无法统计,'wall'用于防火墙
     filters: stat, wall, log4j
     #最大活跃数
@@ -28,36 +29,50 @@ spring:
     testOnReturn: false
     #    filters: stat
 
+    druid:
+      connection-init-sqls: set names utf8mb4
+
+
+
   jpa:
     hibernate:
       ddl-auto: update
+
     show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
 
-  mail:
-    host: smtp.exmail.qq.com
-    username: xxxxxx
-    password: xxxxxx
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
 
-    properties:
-      mail:
-        smtp:
-          auth: true
-          timeout: 100000
-          connectiontimeout: 100000
-          socketFactory:
-            port: 465
-            fallback: false
-            class: javax.net.ssl.SSLSocketFactory
-          starttls:
-            enable: false
-            required: false
-    port: 465
+
+
+#  mail:
+##    host: smtp.exmail.qq.com
+##    username: xxxxxx
+##    password: xxxxxx##
+##    properties:
+##      mail:
+##        smtp:
+##          auth: true
+##          timeout: 100000
+##          connectiontimeout: 100000
+##          socketFactory:
+##            port: 465
+##            fallback: false
+##            class: javax.net.ssl.SSLSocketFactory
+##          starttls:
+##            enable: false
+##            required: false
+##    port: 465
+
 
 
 server:
   port: 8080
-#  servlet:
-#    context-path: /wechat
+  #  servlet:
+  #    context-path: /wechat
 #  tomcat:
 #    uri-encoding: UTF-8
 #    max-threads: 1000

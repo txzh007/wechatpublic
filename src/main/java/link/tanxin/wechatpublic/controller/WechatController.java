@@ -1,13 +1,17 @@
 package link.tanxin.wechatpublic.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import link.tanxin.wechatpublic.service.WechatService;
+import link.tanxin.wechatpublic.utils.HttpUtils;
 import link.tanxin.wechatpublic.utils.MsgTypeParam;
 import link.tanxin.wechatpublic.utils.WechatUtil;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,10 +20,12 @@ import java.util.Map;
  * @author Tan
  * 2019年4月8日 11:28:09
  */
+@Log4j2
 @RestController
 public class WechatController {
     @Autowired
     WechatService wechatService;
+
 
     /**
      * @param signature 微信加密签名，结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
@@ -43,12 +49,12 @@ public class WechatController {
     /**
      * 此方法用于消息转发
      *
-     * @param request
-     * @return
+     * @param request  req
+     * @param response res
      */
 
     @PostMapping("/comm")
-    public void processMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void processMsg(HttpServletRequest request, HttpServletResponse response) {
         // TODO 消息的接收、处理、响应
         //消息来源可靠性验证
 
@@ -60,13 +66,13 @@ public class WechatController {
         String nonce = request.getParameter("nonce");
         // 确认此次GET请求来自微信服务器，原样返回echostr参数内容，则接入生效，成为开发者成功，否则接入失败
         if (!WechatUtil.checkSignature(signature, timestamp, nonce)) {
-            // 消息不可靠，直接返
-            response.getWriter().write("");
-            System.out.println("check失败");
+
+            log.error("check失败");
             return;
         }
         //用户每次向公众号发送消息、或者产生自定义菜单点击事件时，响应URL将得到推送
         try {
+            request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/xml");
             // 调用parseXml方法解析请求消息
@@ -79,20 +85,12 @@ public class WechatController {
             } else {
                 xml = wechatService.parseMessage(map);
             }
-            //返回封装的xml
-            System.out.println(xml);
             response.getWriter().write(xml);
         } catch (Exception ex) {
-            response.getWriter().write("");
+            log.error(ex.getMessage());
         }
 
     }
 
-
-    @RequestMapping("/test2")
-    @ResponseBody
-    public String test2() {
-        return "test2";
-    }
 
 }

@@ -1,8 +1,19 @@
 package link.tanxin.wechatpublic.utils;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 微信公众号相关操作工具类
@@ -10,11 +21,33 @@ import java.util.Arrays;
  * @author Tan
  * 2019年4月11日 15:39:25
  */
+
+@Component
+@Log4j2
 public class WechatUtil {
 
-    public final static String TOKEN = "wechatdemotest";
+    private static final String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public static String sort(String timestamp, String nonce) {
+
+    @Value("${wechat.appid}")
+    private String appId;
+    @Value("${wechat.appsecret}")
+    private String appSecret;
+
+    private static String appid = "";
+    private static String appsecret = "";
+
+
+    @PostConstruct
+    public void initAppid() {
+        appid = this.appId;
+        appsecret = this.appSecret;
+    }
+
+    private final static String TOKEN = "wechatdemotest";
+
+    private static String sort(String timestamp, String nonce) {
         String[] strArray = {TOKEN, timestamp, nonce};
         Arrays.sort(strArray);
         StringBuilder sb = new StringBuilder();
@@ -25,7 +58,7 @@ public class WechatUtil {
         return sb.toString();
     }
 
-    public static String sha1(String str) {
+    private static String sha1(String str) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.update(str.getBytes());
@@ -54,5 +87,32 @@ public class WechatUtil {
         //将三个参数字符串拼接成一个字符串进行sha1加密
         String myString = sha1(sortString);
         return signature.equals(myString);
+    }
+
+    public static String getAccessToken() {
+        Map<String, String> map = new HashMap<>(3);
+        map.put("grant_type", "client_credential");
+        map.put("appid", appid);
+        map.put("secret", appsecret);
+
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode node = mapper.readTree(HttpUtils.sendGet(TOKEN_URL, map, "utf-8"));
+            String accessToken = node.get("access_token").toString().replaceAll("\"", "");
+            log.info("token:" + accessToken);
+            return accessToken;
+
+        } catch (Exception e) {
+
+            log.error("Token 获取失败\n" + e.getMessage());
+
+        } finally {
+
+        }
+
+        return "";
+
+
     }
 }

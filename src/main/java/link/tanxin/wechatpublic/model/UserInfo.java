@@ -1,5 +1,7 @@
 package link.tanxin.wechatpublic.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -22,6 +24,7 @@ public class UserInfo {
     private Byte subscribe;
     private String subscribeScene;
     private String province;
+
 
     @Id
     @Column(name = "id")
@@ -190,5 +193,25 @@ public class UserInfo {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id='" + id + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", sex=" + sex +
+                ", openid='" + openid + '\'' +
+                ", country='" + country + '\'' +
+                ", language='" + language + '\'' +
+                ", headimgurl='" + headimgurl + '\'' +
+                ", modifiedTime=" + modifiedTime +
+                ", subscribeTime=" + subscribeTime +
+                ", city='" + city + '\'' +
+                ", subscribe=" + subscribe +
+                ", subscribeScene='" + subscribeScene + '\'' +
+                ", province='" + province + '\'' +
+                '}';
     }
 }
