@@ -1,4 +1,4 @@
-# 这是一个基于Spring boot的微信Demo
+# 这是一个基于Spring boot的微信公众号后台
 
 
 ## 环境 Java 1.8 Mysql 5.7
